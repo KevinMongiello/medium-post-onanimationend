@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Tutorial: onanimationend</title>
+        <style>
+            #sprite {
+                position: absolute;
+                left: 10px;
+                top: 25px;
+                width: 10vw;
+                min-width: 50px;
+                opacity: 1;
+            }
+            #sprite.drive {
+                animation: drive 1s cubic-bezier(.59,.02,.64,.72) forwards;
+            }
+            @keyframes drive {
+                20% { left: 10px; }
+                100% { left: 90vw; }
+            }
+            
+            #game-over-banner {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                color: blue;
+                transform: translate(-50%, -50%);
+                transform-origin: center;
+                animation: banner-grow 500ms ease-in-out forwards, banner-rotate 1s linear 500ms infinite;
+            }
+            .hide {
+                display: none;
+            }
+            .show {
+                display: block;
+            }
+            @keyframes banner-grow {
+                100% { font-size: 48px; }
+            }
+            @keyframes banner-rotate {
+                0%, 100% { transform: translate(-50%, -50%); }
+                25% { transform: translate(-50%, -50%) rotateZ(10deg);}
+                75% { transform: translate(-50%, -50%) rotateZ(-10deg);}
+            }
+            .line {
+                position: fixed;
+                top: 150px;
+                height: 100000px;
+                transform-origin: bottom;
+                transform: translateY(-100%) rotateX(89.95deg) rotateZ(0.05deg);
+                border: 1px solid black;
+                z-index: -1;
+            }
+            .line1 {
+                background: red;
+                left: 10vw;
+            }
+            .line2 {
+                left: 30vw;
+            }
+            .line3 {
+                left: 47.5vw;
+            }
+            .line4 {
+                left: 60vw;
+            }
+            .line5 {
+                left: 70vw;
+            }
+            .line6 {
+                left: 76.667vw;
+            }
+            .line7 {
+                left: 80vw;
+            }
+            .line8 {
+                left: 83.33vw;
+                background: chartreuse;
+            }
+        </style>
+    </head>
+    <body>
+        <img src='./plane.png' id='sprite' />
+        <div class='line line1'>hi</div>
+        <div class='line line2'>hi</div>
+        <div class='line line3'>hi</div>
+        <div class='line line4'>hi</div>
+        <div class='line line5'>hi</div>
+        <div class='line line6'>hi</div>
+        <div class='line line7'>hi</div>
+        <div class='line line8'>hi</div>
+        <span id='game-over-banner' class='hide'>Congratulations!!!</span> 
+        <script>
+            const sprite = document.getElementById('sprite');
+            const banner = document.getElementById('game-over-banner');
+            sprite.onanimationend = () => {
+                banner.className = 'show';
+            }
+            setTimeout(() => {
+                sprite.className += 'drive';
+            }, 0)
+        </script>
+        
+    </body>
+</html>
